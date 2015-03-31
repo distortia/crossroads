@@ -1,12 +1,12 @@
 $(document).ready(function(){
-	#('sign-up-form').validate({
+	$('#sign-up-form').validate({
 		rules:{
 			name:{
 				required: true
 			},
 			email:{
 				required: true,
-				email:email
+				email:true
 			},
 			password:{
 				minlength: 6,
@@ -17,6 +17,7 @@ $(document).ready(function(){
 				equalTo: "#password"
 			}
 		},
+		//TODO Change text to textfield turning green
 		success: function(element){
 			element.text('Good!').addClass('valid');
 		}

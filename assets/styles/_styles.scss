@@ -1,0 +1,41 @@
+$screen-sm: 768px;
+$screen-md: 875px;
+$screen-md-lg: 1050px;
+$screen-lg: 1200px;
+
+.main-content{
+	margin-top:50px;
+}
+
+.navbar-brand{
+	@media(max-width:$screen-sm){
+		margin-top: 10px;
+	}
+}
+.form-signin{
+	text-align: center;
+	margin: 0 auto;
+	max-width:65%;
+	@media(min-width: $screen-sm) { 
+		max-width:50%;
+	}
+	@media(min-width: $screen-md) { 
+		max-width:40%;
+	}	
+	@media(min-width: $screen-md-lg) { 
+		max-width:35%;
+	}	
+	@media(min-width: $screen-lg) {
+		max-width:30%;
+	}
+
+}
+
+.navbar-header{
+
+	span{
+		margin: 0 auto;
+		text-align: center;
+		color: white;
+	}
+}
