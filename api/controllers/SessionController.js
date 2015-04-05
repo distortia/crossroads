@@ -52,16 +52,40 @@ module.exports = {
 					res.redirect('/session/new');
 					return;
 				}
+				//Authenticate User
 				req.session.authenticated = true;
 				req.session.user = user;
-				res.redirect('/user/show/' + user.id);
-			});
+				//User is online
+				user.online = true;
+				user.save(function(err, next) {
+					if (err) return next(err);
 
+					//Redirect for admins
+					if (req.session.user.admin) {
+						res.redirect('/user/');
+						return;
+					}
+					res.redirect('/user/show/' + user.id);
+				});
+			});
 		});
 	},
 
-	destroy: function(req, res, next){
-		req.session.destroy();
-		res.redirect('/session/new')
+	destroy: function(req, res, next) {
+		User.findOne(req.session.user.id, function foundUser(err, user) {
+			if (err) return next(err);
+			if (!user) return next('User not found');
+
+			var userId = req.session.user.id;
+
+			user.update(userId, {
+					online: false
+				},
+				function(err) {
+					if (err) return next(err);
+					req.session.destroy();
+					res.redirect('/session/new');
+				});
+		});
 	}
 };

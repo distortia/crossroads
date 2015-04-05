@@ -17,9 +17,11 @@ $(document).ready(function(){
 				equalTo: "#password"
 			}
 		},
-		//TODO Change text to textfield turning green
-		success: function(element){
-			element.text('Good!').addClass('valid');
-		}
+		// //TODO Change text to textfield turning green
+		// success: function(element){
+		// 	// element.text('Good!').addClass('valid');
+		// 	// element.prev().append("<span class=\"sr-only\">(success)</span>");
+		// 	// element.prev().addClass( "success" );
+		// }
 	});
 });
