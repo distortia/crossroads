@@ -82,7 +82,7 @@ module.exports = {
 
 		User.findOne(req.session.user.id, function foundUser(err, user) {
 
-			var userId = req.session.User.id;
+			var userId = req.session.user.id;
 
 			if (user) {
 				// The user is "logging out" (e.g. destroying the session) so change the online attribute to false.
@@ -107,8 +107,14 @@ module.exports = {
 				});
 			} else {
 
+				User.update(userId, {
+					online: false
+				}, function(err){
+					if (err) return next(err);
+				});
 				// Wipe out the session (log out)
 				req.session.destroy();
+
 
 				// Redirect the browser to the sign-in screen
 				res.redirect('/session/new');

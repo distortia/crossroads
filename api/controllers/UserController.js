@@ -120,7 +120,6 @@ module.exports = {
 				title: req.param('title'),
 				email: req.param('email')
 			}
-			console.log(userObj.admin);
 		}
 		User.update(req.param('id'), userObj, function userUpdated(err) {
 			if (err) {

@@ -15,7 +15,7 @@ module.exports = {
 			type: 'string',
 			required: true
 		},
-
+		//reporpose this attribute, kind of useless
 		title: {
 			type: 'string',
 			required: true
@@ -27,6 +27,10 @@ module.exports = {
 			unique: true,
 			required: true
 		},
+
+		company:{
+			type: 'string'
+		}
 
 		online: {
 			type: 'boolean',
