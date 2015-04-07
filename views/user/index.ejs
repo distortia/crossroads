@@ -3,7 +3,6 @@
 	<div class="table-responsive">
 		<table class="table table-hover">
 			<tr>
-				<th>ID</th>
 				<th>Name</th>
 				<th>Title</th>
 				<th>Email</th>
@@ -15,8 +14,7 @@
 			</tr>
 
 			<% _.each(users, function(user){ %>
-			<tr data-id="<% user.id %>" data-model="user">
-				<td><%= user.id %></td>
+			<tr data-id="<%= user.id %>" data-model="user">
 				<td><%= user.name %></td>
 				<td><%= user.title %></td>
 				<td><%= user.email %></td>

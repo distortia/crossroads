@@ -16,7 +16,7 @@ module.exports = {
 			var usernamePasswordRequiredError = [{
 				name: 'usernamePasswordRequired',
 				message: 'You must enter both a username and a password.'
-			}]
+			}];
 			req.session.flash = {
 				err: usernamePasswordRequiredError
 			}
@@ -30,7 +30,7 @@ module.exports = {
 				var noAccountError = [{
 					name: 'noAccount',
 					message: 'The email address' + req.param('email') + ' was not found'
-				}]
+				}];
 				req.session.flash = {
 					err: noAccountError
 				}
@@ -45,7 +45,7 @@ module.exports = {
 					var usernamePasswordMismatchError = [{
 						name: 'usernamePasswordMismatch',
 						message: 'Invalid username and password combination'
-					}]
+					}];
 					req.session.flash = {
 						err: usernamePasswordMismatchError
 					}
@@ -60,6 +60,13 @@ module.exports = {
 				user.save(function(err, next) {
 					if (err) return next(err);
 
+					// Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
+					User.publishUpdate(user.id, {
+						loggedIn: true,
+						id: user.id,
+						name: user.name,
+						action: ' has logged in.'
+					});
 					//Redirect for admins
 					if (req.session.user.admin) {
 						res.redirect('/user/');
@@ -72,18 +79,40 @@ module.exports = {
 	},
 
 	destroy: function(req, res, next) {
+
 		User.findOne(req.session.user.id, function foundUser(err, user) {
-			if (err) return next(err);
-			if (!user) return next('User not found');
-			var userId = req.session.user.id;
-			user.update(userId, {
+
+			var userId = req.session.User.id;
+
+			if (user) {
+				// The user is "logging out" (e.g. destroying the session) so change the online attribute to false.
+				User.update(userId, {
 					online: false
-				},
-				function(err) {
+				}, function(err) {
 					if (err) return next(err);
+
+					// Inform other sockets (e.g. connected sockets that are subscribed) that the session for this user has ended.
+					User.publishUpdate(userId, {
+						loggedIn: false,
+						id: userId,
+						name: user.name,
+						action: ' has logged out.'
+					});
+
+					// Wipe out the session (log out)
 					req.session.destroy();
+
+					// Redirect the browser to the sign-in screen
 					res.redirect('/session/new');
 				});
+			} else {
+
+				// Wipe out the session (log out)
+				req.session.destroy();
+
+				// Redirect the browser to the sign-in screen
+				res.redirect('/session/new');
+			}
 		});
 	}
 };

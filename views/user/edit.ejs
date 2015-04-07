@@ -1,15 +1,15 @@
 <form action="/user/update/<%= user.id %>" method="POST" class="form-signin">
-		<h2> Edit User </h2>
+		<h2> Editing <%= user.name %></h2>
 
-		<input value="<%= user.name %>" name="name" type="text" class="form-control"/>
+	<input value="<%= user.name %>" name="name" type="text" class="form-control"/>
 		<input value="<%= user.title %>" name="title" type="text" class="form-control"/>
 		<input value="<%= user.email %>" name="email" type="text" class="form-control"/>
 		<% if (session.authenticated && session.user.admin) { %>
 			<% if (user.admin) { %>
-				<input type="hidden" name="admin" value="unchecked">
+				<input type="hidden" name="admin" value="unchecked"/>
 				<label class="checkbox"><input type="checkbox" name="admin" checked> Admin</label>
 			<% } else { %>
-				<input type="hidden" name="admin" value="unchecked">
+				<input type="hidden" name="admin" value="unchecked"/>
 				<label class="checkbox"><input type="checkbox" name="admin"> Admin</label>
 			<% } %> 
 		<% } %> 
