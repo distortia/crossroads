@@ -14,7 +14,17 @@
  * or any other Grunt tasks you like.)
  */
 
+ //Import bourbon and pals
+// @import "bourbon/bourbon";
+// @import "neat/neat";
+// @import "base/base";
+
+
 @import "styles";
+
+//Import components
+// @import "navbar";
+// @import "footer"
 
 
 // For example:

@@ -75,9 +75,7 @@ module.exports = {
 		User.findOne(req.session.user.id, function foundUser(err, user) {
 			if (err) return next(err);
 			if (!user) return next('User not found');
-
 			var userId = req.session.user.id;
-
 			user.update(userId, {
 					online: false
 				},

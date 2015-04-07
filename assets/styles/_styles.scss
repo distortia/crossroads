@@ -2,6 +2,7 @@ $screen-sm: 768px;
 $screen-md: 875px;
 $screen-md-lg: 1050px;
 $screen-lg: 1200px;
+$large-screen: 960px;
 
 .main-content{
 	margin-top:50px;
@@ -49,4 +50,7 @@ span.grey{
 }
 span.blue{
 	color:lightblue;
+}
+span.black{
+	color:black;
 }
