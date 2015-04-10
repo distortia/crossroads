@@ -2,6 +2,10 @@
 
 a [Sails](http://sailsjs.org) application
 
+If you want to use mongo, go into /config/connections.js and uncomment out the mongo setup I have. 
+Make sure mongod is running
+Also run npm install sails-mongo to get the adapter
+
 List of things to do
 ---------------------
 
