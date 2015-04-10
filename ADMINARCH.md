@@ -14,7 +14,7 @@ Admin Architecture
 |- Site Admin(editor) - a step below company admins and above content admins
 |	+ Add/Remove Content Admins
 |	+ Add/Remove Features/plugins
-|	+ Add/Remove 
+|	+ 
 |
 |- Content Admin(author)
 |	+ Add/Remove content

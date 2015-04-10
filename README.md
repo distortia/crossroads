@@ -16,3 +16,16 @@ List of things to do
 * Convert to bourbon 
 
 
+TODO1
+--------------	
+Condense company create into user creation - ask if user wants to create a company,
+	if yes, use js to add "create company fields"
+	else, have user join a company
+
+TODO2
+-----------
+When user is deleted, also delete session and force a log out sequence
+
+TODO3
+----------
+Clean up error messages - less cryptic

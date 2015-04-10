@@ -15,8 +15,8 @@ module.exports = {
 			type: 'string',
 			required: true
 		},
-		//reporpose this attribute, kind of useless
-		title: {
+
+		level: {
 			type: 'string',
 			required: true
 		},
@@ -29,8 +29,10 @@ module.exports = {
 		},
 
 		company:{
-			type: 'string'
-		}
+			type: 'string',
+			unique: true,
+			required: true
+		},
 
 		online: {
 			type: 'boolean',
@@ -43,14 +45,13 @@ module.exports = {
 		},
 
 		encryptedPassword: {
-			type: 'string' //,
-				// required: true
+			type: 'string'
 		},
 
 		toJSON: function() {
 			var obj = this.toObject();
 			delete obj.password;
-			delete obj.confirmation;
+			delete obj.confirm;
 			delete obj.encryptedPassword;
 			delete obj._csrf;
 			return obj;
@@ -74,7 +75,7 @@ module.exports = {
 				err: ["Password does not match password confirmation."]
 			});
 		}
-		require('bcryptjs').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword) {
+		bcrypt.hash(values.password, 10, function passwordEncrypted(err, encryptedPassword) {
 			if (err) return next(err);
 			values.encryptedPassword = encryptedPassword;
 			next();

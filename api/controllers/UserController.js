@@ -16,18 +16,25 @@ module.exports = {
 
 		var userObj = {
 			name: req.param('name'),
-			title: req.param('title'),
+			level: req.param('level'),
 			email: req.param('email'),
+			level: req.param('level'),
+			company: req.param('company'),
 			password: req.param('password'),
-			confirmation: req.param('confirmation')
+			confirm: req.param('confirm')
+		}
+
+		//If user is company admin
+		if (userObj.level === "Company Admin") {
+			userObj.admin = true;
+		}
+		if (userObj.level === "Content Admin"){
+			console.log('got here');
 		}
 
 		// Create a User with the params sent from 
 		// the sign-up form --> new.ejs
 		User.create(userObj, function userCreated(err, user) {
-
-			// // If there's an error
-			// if (err) return next(err);
 
 			if (err) {
 				console.log(err);
@@ -42,6 +49,8 @@ module.exports = {
 			// Log user in
 			req.session.authenticated = true;
 			req.session.user = user;
+
+
 
 			// Change status to online
 			user.online = true;
@@ -105,9 +114,12 @@ module.exports = {
 
 		var userObj = {
 			name: req.param('name'),
-			title: req.param('title'),
+			company: req.param('company'),
+			level: req.param('level'),
 			email: req.param('email'),
-			admin: req.param('admin')
+			admin: req.param('admin'),
+			company: req.param('company'),
+			level: req.param('level')
 		}
 		//This checks for the admin checkbox values
 		if (userObj.admin === 'unchecked') {
@@ -117,7 +129,8 @@ module.exports = {
 		} else {
 			var userObj = {
 				name: req.param('name'),
-				title: req.param('title'),
+				company: req.param('company'),
+				level: req.param('level'),
 				email: req.param('email')
 			}
 		}

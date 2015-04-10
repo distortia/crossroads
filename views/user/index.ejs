@@ -3,8 +3,9 @@
 	<div class="table-responsive">
 		<table class="table table-hover">
 			<tr>
+				<th>Company</th>
 				<th>Name</th>
-				<th>Title</th>
+				<th>Level</th>
 				<th>Email</th>
 				<th>Admin</th>
 				<th>Online</th>
@@ -15,8 +16,9 @@
 
 			<% _.each(users, function(user){ %>
 			<tr data-id="<%= user.id %>" data-model="user">
+				<td><%= user.company %></td>
 				<td><%= user.name %></td>
-				<td><%= user.title %></td>
+				<td><%= user.level %></td>
 				<td><%= user.email %></td>
 				<%if (user.admin) {%>
 				<td><span class="icono-user gold" aria-hidden="true"></span></td>

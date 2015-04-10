@@ -1,18 +1,37 @@
-<form action="/user/update/<%= user.id %>" method="POST" class="form-signin">
-		<h2> Editing <%= user.name %></h2>
+<form action="/user/update/<%= user.id %>" method="POST" class="form-signin form-horizontal">
+	<h2> Editing <%= user.name %></h2>
 
+	<label for="name">Name</label>
 	<input value="<%= user.name %>" name="name" type="text" class="form-control"/>
-		<input value="<%= user.title %>" name="title" type="text" class="form-control"/>
-		<input value="<%= user.email %>" name="email" type="text" class="form-control"/>
-		<% if (session.authenticated && session.user.admin) { %>
-			<% if (user.admin) { %>
-				<input type="hidden" name="admin" value="unchecked"/>
-				<label class="checkbox"><input type="checkbox" name="admin" checked> Admin</label>
-			<% } else { %>
-				<input type="hidden" name="admin" value="unchecked"/>
-				<label class="checkbox"><input type="checkbox" name="admin"> Admin</label>
-			<% } %> 
+	
+	<label for="level">User Level</label>
+
+	<select name="level" type="text" class="form-control">
+	  <option>CR Admin</option>
+	  <option>Company Admin</option>
+	  <option>Site Admin</option>
+	  <option>Content Admin</option>
+	</select>
+
+	<label for="email">Email</label>
+	<input value="<%= user.email %>" name="email" type="text" class="form-control"/>
+
+
+	<% if (session.authenticated && session.user.admin) { %>
+
+		<label for="company">Company</label>
+		<input value="<%= user.company %>" name="company" type="text" class="form-control" />
+		<% if (user.admin) { %>
+			<input type="hidden" name="admin" value="unchecked"/>
+			<label class="checkbox"><input type="checkbox" name="admin" checked> Admin</label>
+		<% } else { %>
+			<input type="hidden" name="admin" value="unchecked"/>
+			<label class="checkbox"><input type="checkbox" name="admin"> Admin</label>
 		<% } %> 
-		<input type="submit" value="Proceed" class="btn btn-lg btn-primary btn-block"/>
-		<input type="hidden" name="_csrf" value="<%= _csrf %>" />
-	</form>
+	<% } %> 
+
+
+	<input type="submit" value="Proceed" class="btn btn-lg btn-primary btn-block"/>
+	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+
+</form>

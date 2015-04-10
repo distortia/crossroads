@@ -1,0 +1,31 @@
+<div class="container">
+	<h3>Company Administration</h3>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<tr>
+				<th>Company</th>
+				<th>Owner</th>
+				<th>Level</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+
+			<% _.each(companies, function(company){ %>
+			<tr data-id="<%= company.id %>" data-model="company">
+				<td><%= company.name %></td>
+				<td><%= company.owner %></td>
+				<td>TODO</td>
+				<td><a href="/company/show/<%= company.id %>" class="btn btn-sm btn-primary">Show</a></td>
+				<td><a href="/company/edit/<%= company.id %>" class="btn btn-sm btn-warning">Edit</a></td>
+				<td><form action="/company/destroy/<%= company.id %>" method="POST">
+					<input type="hidden" name="_method" value="delete">
+					<input type="submit" class="btn btn-sm btn-danger" value="Delete">
+					<input type="hidden" name="_csrf" value="<%= _csrf %>">
+					</form>
+				</td>
+			</tr>
+			<%  }) %>
+		</table>
+	</div>
+</div>

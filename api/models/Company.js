@@ -7,8 +7,24 @@
 
 module.exports = {
 
-  attributes: {
+	schema: true,
 
-  }
+	attributes: {
+		name: {
+			type: 'string',
+			unique: true
+			
+		},
+
+		owner: {
+			type: 'string',
+		
+		},
+
+		toJSON: function() {
+			var obj = this.toObject();
+			delete obj._csrf;
+			return obj;
+		}
+	}
 };
-
