@@ -69,9 +69,9 @@ module.exports = {
 	},
 
 	beforeCreate: function(values, next) {
-		console.log(values); // For Debugging purposes
+		// console.log(values); // For Debugging purposes
 		if (values.level === "Company Admin"){
-			User.findOneByCompany({ company: values.company }, function foundCompany(err, company) {
+			User.find({ company: values.company }, function foundCompany(err, company) {
 				if (err) return next(err);
 				
 				if (company) {
@@ -81,7 +81,7 @@ module.exports = {
 				}
 			});
 		} else {
-			User.findOneByCompany({ company: values.company }, function foundCompany(err, company) {
+			User.find({ company: values.company }, function foundCompany(err, company) {
 				if (err) return next(err);
 				if (company == []) {
 					return next({

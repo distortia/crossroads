@@ -114,6 +114,7 @@ module.exports = {
 				});
 				// Wipe out the session (log out)
 				req.session.destroy();
+				
 
 
 				// Redirect the browser to the sign-in screen
