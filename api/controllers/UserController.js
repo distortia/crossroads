@@ -28,9 +28,6 @@ module.exports = {
 		if (userObj.level === "Company Admin") {
 			userObj.admin = true;
 		}
-		if (userObj.level === "Content Admin"){
-			console.log('got here');
-		}
 
 		// Create a User with the params sent from 
 		// the sign-up form --> new.ejs
