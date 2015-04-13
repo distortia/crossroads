@@ -70,10 +70,10 @@ module.exports = {
 
 	beforeCreate: function(values, next) {
 		// console.log(values); // For Debugging purposes
-		if (values.level === "Company Admin"){
+		if (values.level == "Company Admin"){
 			User.find({ company: values.company }, function foundCompany(err, company) {
 				if (err) return next(err);
-				
+				console.log(company);
 				if (company) {
 					return next({
 						err: ['That company already exists. Please contact customer support if this is in error.']
@@ -83,7 +83,8 @@ module.exports = {
 		} else {
 			User.find({ company: values.company }, function foundCompany(err, company) {
 				if (err) return next(err);
-				if (company == []) {
+				console.log(company);
+				if (!company) {
 					return next({
 						err: ['That company does not exist. Please create one or contact customer support if this is in error.']
 					});

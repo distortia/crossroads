@@ -24,7 +24,7 @@ module.exports = {
 		}
 
 		//If user is company admin
-		if (userObj.level === "Company Admin") {
+		if (userObj.level == "Company Admin") {
 			userObj.admin = true;
 		}
 
