@@ -74,7 +74,7 @@ module.exports = {
 			User.findOneByCompany({ company: values.company }, function foundCompany(err, company) {
 				if (err) return next(err);
 				
-				if (company === values.company) {
+				if (company) {
 					return next({
 						err: ['That company already exists. Please contact customer support if this is in error.']
 					});
