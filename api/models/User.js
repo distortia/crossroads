@@ -28,9 +28,8 @@ module.exports = {
 			required: true
 		},
 
-		company:{
+		company: {
 			type: 'string',
-			unique: true,
 			required: true
 		},
 
@@ -38,7 +37,7 @@ module.exports = {
 			type: 'boolean',
 			defaultsTo: false
 		},
-		
+
 		admin: {
 			type: 'boolean',
 			defaultsTo: false
@@ -70,6 +69,28 @@ module.exports = {
 	},
 
 	beforeCreate: function(values, next) {
+		console.log(values); // For Debugging purposes
+		if (values.level === "Company Admin"){
+			User.findOneByCompany({ company: values.company }, function foundCompany(err, company) {
+				if (err) return next(err);
+				
+				if (company === values.company) {
+					return next({
+						err: ['That company already exists. Please contact customer support if this is in error.']
+					});
+				}
+			});
+		} else {
+			User.findOneByCompany({ company: values.company }, function foundCompany(err, company) {
+				if (err) return next(err);
+				if (company == []) {
+					return next({
+						err: ['That company does not exist. Please create one or contact customer support if this is in error.']
+					});
+				}
+			});
+		}
+
 		if (!values.password || values.password != values.confirm) {
 			return next({
 				err: ["Password does not match password confirmation."]

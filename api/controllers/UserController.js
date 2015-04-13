@@ -18,7 +18,6 @@ module.exports = {
 			name: req.param('name'),
 			level: req.param('level'),
 			email: req.param('email'),
-			level: req.param('level'),
 			company: req.param('company'),
 			password: req.param('password'),
 			confirm: req.param('confirm')
@@ -62,7 +61,6 @@ module.exports = {
 
 				// After successfully creating the user
 				// redirect to the show action
-				// From ep1-6: //res.json(user); 
 
 				res.redirect('/user/show/' + user.id);
 			});
