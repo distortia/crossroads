@@ -5,7 +5,7 @@
 			<tr>
 				<th>Company</th>
 				<th>Owner</th>
-				<th>Level</th>
+				<th>Plan</th>
 				<th></th>
 				<th></th>
 				<th></th>
@@ -13,9 +13,9 @@
 
 			<% _.each(companies, function(company){ %>
 			<tr data-id="<%= company.id %>" data-model="company">
-				<td><%= company.name %></td>
+				<td><%= company.companyName %></td>
 				<td><%= company.owner %></td>
-				<td>TODO</td>
+				<td><%= company.plan %></td>
 				<td><a href="/company/show/<%= company.id %>" class="btn btn-sm btn-primary">Show</a></td>
 				<td><a href="/company/edit/<%= company.id %>" class="btn btn-sm btn-warning">Edit</a></td>
 				<td><form action="/company/destroy/<%= company.id %>" method="POST">

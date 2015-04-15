@@ -11,6 +11,7 @@ module.exports = {
 	// schema: true,
 
 	attributes: {
+		
 		firstName: {
 			type: 'string',
 			required: true
@@ -64,7 +65,13 @@ module.exports = {
 
 		company: {
 			model: 'company'
-		}
+		},
+		//When a user joins a company, they must be approved by the company admin or site admin
+		//Maybe convert these to integers to make it easier and quicker to process
+		approved: {
+			type: 'string',
+			enum: ['pending','approved', 'denied'] 
+		}, 
 
 		toJSON: function() {
 			var obj = this.toObject();
