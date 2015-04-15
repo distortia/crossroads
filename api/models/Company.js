@@ -48,7 +48,7 @@ module.exports = {
     plan: {
       type: "string",
       enum: ['essential', 'business', 'enterprise']
-    }
+    }, 
 
 	toJSON: function() {
 		var obj = this.toObject();

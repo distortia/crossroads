@@ -35,7 +35,13 @@ module.exports.policies = {
     edit: "userProfile",
     update: "userProfile",
     '*': "admin"
-  }
+  },
+
+  // company: {
+  //   edit: "siteAdmin",
+  //   update: "siteAdmin",
+  //   '*': "userProfile"
+  // }
 
   /***************************************************************************
   *                                                                          *
