@@ -8,28 +8,37 @@ var bcrypt = require('bcryptjs');
 
 module.exports = {
 
-	schema: true,
+	// schema: true,
 
 	attributes: {
-		name: {
+		firstName: {
 			type: 'string',
 			required: true
 		},
 
-		level: {
+		lastName: {
 			type: 'string',
 			required: true
+		},
+
+		fullName: function() {
+			return this.firstName + ' ' + this.lastName;
+		},
+		//USER ADMIN LEVEL IS BROKEN DOWN INTO 4 categories
+		//Crossroads Admin 	- 0
+		//Company Owner		- 1
+		//Site Admin		- 2
+		//Content Admin		- 3  -- lowest form of rights
+		adminLevel: {
+			type: 'integer',
+			required: true,
+			defaultsTo: '3'
 		},
 
 		email: {
 			type: 'string',
 			email: true,
 			unique: true,
-			required: true
-		},
-
-		company: {
-			type: 'string',
 			required: true
 		},
 
@@ -43,9 +52,19 @@ module.exports = {
 			defaultsTo: false
 		},
 
+		phoneNumber: {
+			type: 'integer',
+			maxLength: 10,
+			number: true
+		},
+
 		encryptedPassword: {
 			type: 'string'
 		},
+
+		company: {
+			model: 'company'
+		}
 
 		toJSON: function() {
 			var obj = this.toObject();
@@ -69,28 +88,6 @@ module.exports = {
 	},
 
 	beforeCreate: function(values, next) {
-		// console.log(values); // For Debugging purposes
-		if (values.level == "Company Admin"){
-			User.find({ company: values.company }, function foundCompany(err, company) {
-				if (err) return next(err);
-				console.log(company);
-				if (company) {
-					return next({
-						err: ['That company already exists. Please contact customer support if this is in error.']
-					});
-				}
-			});
-		} else {
-			User.find({ company: values.company }, function foundCompany(err, company) {
-				if (err) return next(err);
-				console.log(company);
-				if (!company) {
-					return next({
-						err: ['That company does not exist. Please create one or contact customer support if this is in error.']
-					});
-				}
-			});
-		}
 
 		if (!values.password || values.password != values.confirm) {
 			return next({

@@ -15,23 +15,20 @@ module.exports = {
 	create: function(req, res, next) {
 
 		var userObj = {
-			name: req.param('name'),
-			level: req.param('level'),
-			email: req.param('email'),
-			company: req.param('company'),
-			password: req.param('password'),
-			confirm: req.param('confirm')
-		}
-
-		//If user is company admin
-		if (userObj.level == "Company Admin") {
-			userObj.admin = true;
+			firstName: 		req.param('firstName'),
+			lastName: 		req.param('lastName'),
+			fullName: 		req.param('fullName'),
+			adminLevel: 	req.param('adminLevel'),
+			email: 			req.param('email'),
+			phoneNumber: 	req.param('phoneNumber'),
+			password: 		req.param('password'),
+			confirm: 		req.param('confirm')
 		}
 
 		// Create a User with the params sent from 
 		// the sign-up form --> new.ejs
 		User.create(userObj, function userCreated(err, user) {
-
+			console.log("User Object:" + userObj);
 			if (err) {
 				console.log(err);
 				req.session.flash = {
@@ -56,12 +53,8 @@ module.exports = {
 				// add the action attribute to the user object for the flash message.
 				user.action = " signed-up and logged-in."
 
-				// Let other subscribed sockets know that the user was created.
-				User.publishCreate(user);
-
 				// After successfully creating the user
 				// redirect to the show action
-
 				res.redirect('/user/show/' + user.id);
 			});
 		});
@@ -108,13 +101,13 @@ module.exports = {
 	update: function(req, res, next) {
 
 		var userObj = {
-			name: req.param('name'),
-			company: req.param('company'),
-			level: req.param('level'),
-			email: req.param('email'),
-			admin: req.param('admin'),
-			company: req.param('company'),
-			level: req.param('level')
+			firstName: 		req.param('firstName'),
+			lastName: 		req.param('lastName'),
+			fullName: 		req.param('fullName'),
+			adminLevel: 	req.param('adminLevel'),
+			email: 			req.param('email'),
+			phoneNumber: 	req.param('phoneNumber'),
+			level: 			req.param('level')
 		}
 		//This checks for the admin checkbox values
 		if (userObj.admin === 'unchecked') {
@@ -123,10 +116,12 @@ module.exports = {
 			userObj.admin = true;
 		} else {
 			var userObj = {
-				name: req.param('name'),
-				company: req.param('company'),
-				level: req.param('level'),
-				email: req.param('email')
+			firstName: 		req.param('firstName'),
+			lastName: 		req.param('lastName'),
+			fullName: 		req.param('fullName'),
+			adminLevel: 	req.param('adminLevel'),
+			email: 			req.param('email'),
+			phoneNumber: 	req.param('phoneNumber')
 			}
 		}
 		User.update(req.param('id'), userObj, function userUpdated(err) {
@@ -147,42 +142,10 @@ module.exports = {
 
 			User.destroy(req.param('id'), function userDestroyed(err) {
 				if (err) return next(err);
-
-				// Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
-				User.publishUpdate(user.id, {
-					name: user.name,
-					action: ' has been destroyed.'
-				});
-
-				// Let other sockets know that the user instance was destroyed.
-				User.publishDestroy(user.id);
-
 			});
 
 			res.redirect('/user');
 
 		});
-	},
-
-	// This action works with app.js socket.get('/user/subscribe') to
-	// subscribe to the User model classroom and instances of the user
-	// model
-	subscribe: function(req, res) {
-
-		// Find all current users in the user model
-		User.find(function foundUsers(err, users) {
-			if (err) return next(err);
-
-			// subscribe this socket to the User model classroom
-			User.subscribe(req.socket);
-
-			// subscribe this socket to the user instance rooms
-			User.subscribe(req.socket, users);
-
-			// This will avoid a warning from the socket for trying to render
-			// html over the socket.
-			res.send(200);
-		});
 	}
-
 };
