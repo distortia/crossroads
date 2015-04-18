@@ -5,7 +5,7 @@
 			<tr>
 				<th>Company</th>
 				<th>Name</th>
-				<th>Level</th>
+				<th>Admin Level</th>
 				<th>Email</th>
 				<th>Admin</th>
 				<th>Online</th>
@@ -13,11 +13,11 @@
 				<th></th>
 				<th></th>
 			</tr>
-
-			<% _.each(users, function(user){ %>
+	
+			<% _.each(users, function(user){ %>	
 			<tr data-id="<%= user.id %>" data-model="user">
 				<td><%= user.company %></td>
-				<td><%= user.name %></td>
+				<td><%= user.getFullName() %></td>
 				<td><%= user.level %></td>
 				<td><%= user.email %></td>
 				<%if (user.admin) {%>

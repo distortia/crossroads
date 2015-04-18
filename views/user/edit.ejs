@@ -1,18 +1,26 @@
 <form action="/user/update/<%= user.id %>" method="POST" class="form-signin form-horizontal">
-	<h2> Editing <%= user.name %></h2>
-
-	<label for="name">Name</label>
-	<input value="<%= user.name %>" name="name" type="text" class="form-control"/>
 	
-	<label for="level">User Level</label>
-
-	<select name="level" type="text" class="form-control">
-	  <option>CR Admin</option>
-	  <option>Company Admin</option>
-	  <option>Site Admin</option>
-	  <option>Content Admin</option>
-	</select>
-
+	<h2> Editing <%= user.getFullName() %></h2>
+	
+	<label for="firstName">First Name</label>
+	<input value="<%= user.firstName %>" name="firstName" type="text" class="form-control"/>
+	<label for="lastName">Last Name</label>
+	<input value="<%= user.lastName %>" name="lastName" type="text" class="form-control"/>
+	<% if ( req.session.user.adminLevel <= 2) { %>
+		<label for="adminLevel">Admin Level</label>
+		<select name="adminLevel" type="text" class="form-control">
+			//If user is Crossroads admin
+			<% if(req.session.user.adminLevel < 1) { %>
+		  		<option value="0" <% if (user.adminLevel === 0) {%> selected="selected" <% }%>>CR Admin - 0</option>
+		  	<% } %>
+		  	//If User is Company Owner
+		  	<% if (req.session.user.adminLevel <= 1) { %>
+			  <option value="1" <% if (user.adminLevel === 1) {%> selected="selected" <% }%>>Company Owner - 1</option>
+			<% } %>
+		  <option value="2" <% if (user.adminLevel === 2) {%> selected="selected" <% }%>>Site Admin - 2</option>
+		  <option value="3" <% if (user.adminLevel === 3) {%> selected="selected" <% }%>>Content Admin - 3</option>
+		</select>
+	<% } %>
 	<label for="email">Email</label>
 	<input value="<%= user.email %>" name="email" type="text" class="form-control"/>
 

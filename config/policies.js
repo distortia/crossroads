@@ -28,6 +28,10 @@ module.exports.policies = {
 
   '*': 'flash',
 
+  company: {
+    update: "siteAdmin",
+    '*': "userProfile"
+  }, 
   user: {
     'new' : "flash",
     create: "flash",
@@ -35,13 +39,7 @@ module.exports.policies = {
     edit: "userProfile",
     update: "userProfile",
     '*': "admin"
-  },
-
-  // company: {
-  //   edit: "siteAdmin",
-  //   update: "siteAdmin",
-  //   '*': "userProfile"
-  // }
+  }
 
   /***************************************************************************
   *                                                                          *

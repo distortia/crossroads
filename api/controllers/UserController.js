@@ -18,17 +18,17 @@ module.exports = {
 			firstName: 		req.param('firstName'),
 			lastName: 		req.param('lastName'),
 			fullName: 		req.param('fullName'),
-			adminLevel: 	req.param('adminLevel'),
 			email: 			req.param('email'),
 			phoneNumber: 	req.param('phoneNumber'),
 			password: 		req.param('password'),
+			adminLevel: 	req.param('adminLevel'),
 			confirm: 		req.param('confirm')
 		}
 
 		// Create a User with the params sent from 
 		// the sign-up form --> new.ejs
 		User.create(userObj, function userCreated(err, user) {
-			console.log("User Object:" + userObj);
+
 			if (err) {
 				console.log(err);
 				req.session.flash = {
@@ -42,8 +42,7 @@ module.exports = {
 			// Log user in
 			req.session.authenticated = true;
 			req.session.user = user;
-
-
+			// req.session.user.adminLevel = adminLevel;
 
 			// Change status to online
 			user.online = true;
@@ -99,7 +98,6 @@ module.exports = {
 
 	// process the info from edit view
 	update: function(req, res, next) {
-
 		var userObj = {
 			firstName: 		req.param('firstName'),
 			lastName: 		req.param('lastName'),
@@ -107,7 +105,7 @@ module.exports = {
 			adminLevel: 	req.param('adminLevel'),
 			email: 			req.param('email'),
 			phoneNumber: 	req.param('phoneNumber'),
-			level: 			req.param('level')
+			admin: 			req.param('admin')
 		}
 		//This checks for the admin checkbox values
 		if (userObj.admin === 'unchecked') {

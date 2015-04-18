@@ -21,10 +21,6 @@ module.exports = {
 			type: 'string',
 			required: true
 		},
-
-		fullName: function() {
-			return this.firstName + ' ' + this.lastName;
-		},
 		//USER ADMIN LEVEL IS BROKEN DOWN INTO 4 categories
 		//Crossroads Admin 	- 0
 		//Company Owner		- 1
@@ -32,7 +28,6 @@ module.exports = {
 		//Content Admin		- 3  -- lowest form of rights
 		adminLevel: {
 			type: 'integer',
-			required: true,
 			defaultsTo: '3'
 		},
 
@@ -54,9 +49,8 @@ module.exports = {
 		},
 
 		phoneNumber: {
-			type: 'integer',
-			maxLength: 10,
-			number: true
+			type: 'string',
+			maxLength: 10
 		},
 
 		encryptedPassword: {
@@ -64,7 +58,8 @@ module.exports = {
 		},
 
 		company: {
-			model: 'company'
+			model: 'company',
+			defaultsTo: 'None'
 		},
 		//When a user joins a company, they must be approved by the company admin or site admin
 		//Maybe convert these to integers to make it easier and quicker to process
@@ -72,7 +67,7 @@ module.exports = {
 			type: 'string',
 			enum: ['pending','approved', 'denied'] 
 		}, 
-
+		//Attribute methods
 		toJSON: function() {
 			var obj = this.toObject();
 			delete obj.password;
@@ -80,6 +75,10 @@ module.exports = {
 			delete obj.encryptedPassword;
 			delete obj._csrf;
 			return obj;
+		},
+
+		getFullName: function() {
+			return this.firstName + ' ' + this.lastName;
 		}
 	},
 
@@ -95,7 +94,6 @@ module.exports = {
 	},
 
 	beforeCreate: function(values, next) {
-
 		if (!values.password || values.password != values.confirm) {
 			return next({
 				err: ["Password does not match password confirmation."]
@@ -106,5 +104,7 @@ module.exports = {
 			values.encryptedPassword = encryptedPassword;
 			next();
 		});
+
 	}
+
 };
