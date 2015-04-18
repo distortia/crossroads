@@ -107,10 +107,10 @@ module.exports = {
 			phoneNumber: 	req.param('phoneNumber'),
 			admin: 			req.param('admin')
 		}
-		//This checks for the admin checkbox values
-		if (userObj.admin === 'unchecked') {
+
+		if (userObj.adminLevel != "0") {
 			userObj.admin = false;
-		} else if (userObj.admin[1] === 'on') {
+		} else if (userObj.adminLevel === '0') {
 			userObj.admin = true;
 		} else {
 			var userObj = {
@@ -122,6 +122,7 @@ module.exports = {
 			phoneNumber: 	req.param('phoneNumber')
 			}
 		}
+
 		User.update(req.param('id'), userObj, function userUpdated(err) {
 			if (err) {
 				return res.redirect('/user/edit/' + req.param('id'));

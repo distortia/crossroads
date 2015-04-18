@@ -20,25 +20,11 @@
 		  <option value="2" <% if (user.adminLevel === 2) {%> selected="selected" <% }%>>Site Admin - 2</option>
 		  <option value="3" <% if (user.adminLevel === 3) {%> selected="selected" <% }%>>Content Admin - 3</option>
 		</select>
+	<% } else { %>
+	<input type="hidden" name="adminLevel" value="<%= user.adminLevel %>"/>
 	<% } %>
 	<label for="email">Email</label>
 	<input value="<%= user.email %>" name="email" type="text" class="form-control"/>
-
-
-	<% if (session.authenticated && session.user.admin) { %>
-
-		<label for="company">Company</label>
-		<input value="<%= user.company %>" name="company" type="text" class="form-control" />
-		<% if (user.admin) { %>
-			<input type="hidden" name="admin" value="unchecked"/>
-			<label class="checkbox"><input type="checkbox" name="admin" checked> Admin</label>
-		<% } else { %>
-			<input type="hidden" name="admin" value="unchecked"/>
-			<label class="checkbox"><input type="checkbox" name="admin"> Admin</label>
-		<% } %> 
-	<% } %> 
-
-
 	<input type="submit" value="Update" class="btn btn-lg btn-primary btn-block"/>
 	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
 
