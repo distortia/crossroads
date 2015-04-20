@@ -21,22 +21,22 @@ module.exports = {
 			zipCode: 		req.param('zipCode')
 		}
 
+
 		// Create a Company with the params sent from 
 		// the sign-up form --> new.ejs
 		Company.create(companyObj, function companyCreated(err, company) {
-			console.log("Company Object:" + companyObj); // for debugging purposes
 			if (err) {
-				console.log(err);
 				req.session.flash = {
-					err: err
+					err: ["Company already exists. If this is in error, please contact support."]
 				}
 				// If error redirect back to sign-up page
 				return res.redirect('/company/new');
 			}
 
-			Company.save(function(err, company) {
+			company.save(function(err, company) {
 				if (err) return next(err);
-
+				UserObj.Adminlevel = "1";
+				User.update(req.param('id'), UserObj.adminLevel);
 				// After successfully creating the company
 				// redirect to the show action
 				res.redirect('/company/show/' + company.id);
@@ -71,7 +71,6 @@ module.exports = {
 		Company.findOne(req.param('id'), function foundCompany(err, company) {
 			if (err) return next(err);
 			if (!company) return next('Company doesn\'t exist.');
-
 			res.view({
 				company: company
 			});

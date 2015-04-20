@@ -56,16 +56,16 @@
       <ul class="nav navbar-nav">
         <li><a href="/">Home</a></li>
         <% if (session.authenticated) { %>
-          <li><a href="/user/show/<%= session.user.id %>"><%= session.user.name %>'s Profile</a></li>
+          <li><a href="/user/show/<%= session.user.id %>"><%= session.user.firstName %>'s Profile</a></li>
+         <li><a href="/company">My Company</a></li>
         <% } %>
-        <% if (session.authenticated && session.user.admin) { %>
-        <li><a href="/user">Users</a></li>
-        <li><a href="/company">Companies</a></li>
+        <% if (session.authenticated && session.user.admin) { %>   
+           <li><a href="/user">Users</a></li>
         <% } %>
       </ul>
       <% if (session.authenticated) {%>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/session/destroy">Log Out, <%= session.user.name %>?</a></li>
+        <li><a href="/session/destroy">Log Out, <%= session.user.firstName %>?</a></li>
       <% } %>
       </ul>
       <% if (!session.authenticated) { %>

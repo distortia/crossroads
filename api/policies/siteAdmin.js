@@ -1,8 +1,5 @@
 module.exports = function (req, res, ok){
 	//If the user is logged in and if the admin level is less than 2 - site admin and above
-	console.log("req.session.user " + req.session.user);
-	console.log("req.session.user.adminLevel " + req.session.user.adminLevel);
-
 	if (req.session.user && req.session.user.adminLevel <= "2") {
 		return ok();
 	} else {

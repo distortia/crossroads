@@ -27,19 +27,20 @@ module.exports.policies = {
   ***************************************************************************/
 
   '*': 'flash',
-
-  company: {
-    update: "siteAdmin",
-    '*': "userProfile"
-  }, 
   user: {
-    'new' : "flash",
-    create: "flash",
-    show: "userProfile",
-    edit: "userProfile",
-    update: "userProfile",
-    '*': "admin"
-  }
+    'new' : 'flash',
+    create: 'flash',
+    show: 'userProfile',
+    edit: 'userProfile',
+    update: 'userProfile',
+    '*': 'isAdmin'
+  },
+  
+  CompanyController: {
+    edit: ['isAdmin', 'isLoggedIn', 'flash'],
+    update: ['isAdmin', 'isLoggedIn', 'flash'],
+    '*': ['isLoggedIn', 'flash']
+  },
 
   /***************************************************************************
   *                                                                          *
