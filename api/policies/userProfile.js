@@ -1,7 +1,7 @@
 
 module.exports = function(req, res, ok) {
 	var sessionUserMatchesId = req.session.user.id === req.param('id');
-	var isAdmin = req.session.user.admin;
+	var isAdmin = req.session.user.adminLevel <= 1;
 	
 	// The requested id does not match the user's id,
 	// and this is not an admin

@@ -18,7 +18,8 @@ module.exports = {
 			street: 		req.param('street'),
 			city: 			req.param('city'),
 			state: 			req.param('state'),
-			zipCode: 		req.param('zipCode')
+			zipCode: 		req.param('zipCode'),
+			owner: 			req.session.user.id
 		}
 
 
@@ -31,12 +32,15 @@ module.exports = {
 				}
 				// If error redirect back to sign-up page
 				return res.redirect('/company/new');
+				User.update(req.session.user.id, {company: company.id}, function userUpdated(err){
+					if(err) return next(err);
+					if(!user) return next();
+				});
 			}
 
+			
 			company.save(function(err, company) {
 				if (err) return next(err);
-				UserObj.Adminlevel = "1";
-				User.update(req.param('id'), UserObj.adminLevel);
 				// After successfully creating the company
 				// redirect to the show action
 				res.redirect('/company/show/' + company.id);
@@ -112,6 +116,28 @@ module.exports = {
 			res.redirect('/company');
 
 		});
+	},
+
+	join: function(req,res, next){
+		userID = req.session.user.id;
+		Company.findOne({companyName: req.param('companyName')}, function foundCompany(err, company){
+			if (err) return err;
+			if (!company){
+					req.session.flash = {
+					err: ["Company already exists. If this is in error, please contact support."]
+				}
+			}
+			
+			User.findOne(userID, function foundUser(err, user){
+				if (err) return next(err);
+				if (!user) return next('User doesn\'t exist');
+				User.update(userID, {company: req.param('companyName')}).exec(function userUpdated(err){
+					if (err) return err;
+					console.log('Updating ' + userID + ' with ' + company);
+				});
+			});	
+		});
+		res.redirect('/company');
 	}
 
 };

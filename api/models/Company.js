@@ -38,7 +38,7 @@ module.exports = {
 
   	users: {
   		collection: "user",
-  		via: "company"
+  		via: "companies"
   	},
 
   	owner: {
@@ -50,11 +50,19 @@ module.exports = {
       enum: ['essential', 'business', 'enterprise']
     }, 
 
-	toJSON: function() {
-		var obj = this.toObject();
-		delete obj._csrf;
-		return obj;
-	}
-  }
+  	toJSON: function() {
+  		var obj = this.toObject();
+  		delete obj._csrf;
+  		return obj;
+  	}
+
+    // getOwner: function(){
+    //   User.findOne(this.owner, function foundUser(err, user) {
+        
+    //   });
+    //   return ownerName;
+    // }
+  },
+
 };
 

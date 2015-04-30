@@ -1,5 +1,5 @@
 <form action="/company/create" method="POST" id="sign-up-form" class="form-signin">
-	<h2 class="form-signin-heading">Create or join a Company!</h2>
+	<h2 class="form-signin-heading">Create a Company!</h2>
 
 	<% if(flash && flash.err) { %>
 		<ul class="alert alert-success">
@@ -75,5 +75,7 @@
 	<br>
 	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Create Company">
 	<input type="hidden" name="_csrf" value="<%= _csrf %>">
+	<h5>Or</h5>
+	<h5><a href="/company/join/">Join a Company!</a></h5>
 </form>
 

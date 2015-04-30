@@ -6,22 +6,20 @@
 	<input value="<%= user.firstName %>" name="firstName" type="text" class="form-control"/>
 	<label for="lastName">Last Name</label>
 	<input value="<%= user.lastName %>" name="lastName" type="text" class="form-control"/>
-	<% if ( req.session.user.adminLevel <= 2) { %>
+	<% if ( req.session.user.adminLevel != 3) { %>
 		<label for="adminLevel">Admin Level</label>
 		<select name="adminLevel" type="text" class="form-control">
-			//If user is Crossroads admin
-			<% if(req.session.user.adminLevel === 0) { %>
-		  		<option value="0" <% if (user.adminLevel === 0) {%> selected="selected" <% }%>>CR Admin - 0</option>
-		  	<% } %>
-		  	//If User is Company Owner
-		  	<% if (req.session.user.adminLevel  <= 1) { %>
+			<% if(req.session.user.adminLevel === 0 ) { %>
+				<option value="0" <% if (user.adminLevel === 0) {%> selected="selected" <% }%>>CR Admin - 0</option>
+			<% } if(req.session.user.adminLevel <= 1) { %>
 			  	<option value="1" <% if (user.adminLevel === 1) {%> selected="selected" <% }%>>Company Owner - 1</option>
-			<% } %>
-		  <option value="2" <% if (user.adminLevel === 2) {%> selected="selected" <% }%>>Site Admin - 2</option>
-		  <option value="3" <% if (user.adminLevel === 3) {%> selected="selected" <% }%>>Content Admin - 3</option>
+			<% } if(req.session.user.adminLevel <=2 ) { %>
+		 		<option value="2" <% if (user.adminLevel === 2) {%> selected="selected" <% }%>>Site Admin - 2</option>
+		  		<option value="3" <% if (user.adminLevel === 3) {%> selected="selected" <% }%>>Content Admin - 3</option>
+		 	<% } %>
 		</select>
 	<% } else { %>
-	<input type="hidden" name="adminLevel" value="<%= user.adminLevel %>"/>
+		<input type="hidden" name="adminLevel" value="<%= user.adminLevel %>"/>
 	<% } %>
 	<label for="email">Email</label>
 	<input value="<%= user.email %>" name="email" type="text" class="form-control"/>

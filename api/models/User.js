@@ -57,9 +57,11 @@ module.exports = {
 			type: 'string'
 		},
 
-		company: {
-			model: 'company',
-			defaultsTo: 'None'
+		companies: {
+			// model:'company'
+			collection: "company",
+			via: 'users',
+			dominant: true
 		},
 		//When a user joins a company, they must be approved by the company admin or site admin
 		//Maybe convert these to integers to make it easier and quicker to process

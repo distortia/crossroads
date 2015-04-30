@@ -30,7 +30,6 @@ module.exports = {
 		User.create(userObj, function userCreated(err, user) {
 
 			if (err) {
-				console.log(err);
 				req.session.flash = {
 					err: err
 				}
