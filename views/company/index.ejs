@@ -1,14 +1,3 @@
-<% if(!req.session.user.company) { %>
-	<form action="/company/join" method="POST" id="sign-up-form" class="form-signin">	
-		<h2 class="form-signin-heading">Join A Company</h2>
-		<label for="companyName">Company</label>
-		<input type="text" class="form-control" placeholder="Company" name="companyName">
-		<input type="submit" class="btn btn-primary" value="Join company!">
-		<input type="hidden" name="_csrf" value="<%= _csrf %>">
-		<h5>Or</h5>
-		<h5><a href="/company/new/">Create a Company!</a></h5>
-	</form>
-<% } else { %> 
 <div class="container">
 	<h3>Company Administration</h3>
 	<div class="table-responsive">
@@ -25,8 +14,7 @@
 			<% _.each(companies, function(company){ %>
 			<tr data-id="<%= company.id %>" data-model="company">
 				<td><%= company.companyName %></td>
-				<!-- <td><%= company.owner %></td> -->
-				<td><% %></td>
+				<td><%= company.owner %></td>
 				<td><%= company.plan %></td>
 				<td><a href="/company/show/<%= company.id %>" class="btn btn-sm btn-primary">Show</a></td>
 				<td><a href="/company/edit/<%= company.id %>" class="btn btn-sm btn-warning">Edit</a></td>
@@ -41,4 +29,3 @@
 		</table>
 	</div>
 </div>
-<% } %>

@@ -11,6 +11,11 @@ module.exports = {
 	'new': function(req, res) {
 		res.view();
 	},
+	
+	'join': function(req, res){
+		res.view();
+	},
+	
 	create: function(req, res, next) {
 
 		var companyObj = {
@@ -20,25 +25,24 @@ module.exports = {
 			state: 			req.param('state'),
 			zipCode: 		req.param('zipCode'),
 			owner: 			req.session.user.id
-		}
+		};
 
 
-		// Create a Company with the params sent from 
-		// the sign-up form --> new.ejs
+		//Comany.update company.owner with req.session.user.id
 		Company.create(companyObj, function companyCreated(err, company) {
 			if (err) {
 				req.session.flash = {
 					err: ["Company already exists. If this is in error, please contact support."]
-				}
+				};
 				// If error redirect back to sign-up page
 				return res.redirect('/company/new');
-				User.update(req.session.user.id, {company: company.id}, function userUpdated(err){
-					if(err) return next(err);
-					if(!user) return next();
-				});
 			}
-
 			
+			User.update(req.session.user.id, {company: company.id}, function userUpdated(err,user){
+				if(err) return next(err);
+				if(!user) return next();
+			});
+
 			company.save(function(err, company) {
 				if (err) return next(err);
 				// After successfully creating the company
@@ -90,7 +94,7 @@ module.exports = {
 			city: 			req.param('city'),
 			state: 			req.param('state'),
 			zipCode: 		req.param('zipCode')
-		}
+		};
 
 		Company.update(req.param('id'), companyObj, function companyUpdated(err) {
 			if (err) {
@@ -112,31 +116,30 @@ module.exports = {
 			Company.destroy(req.param('id'), function companyDestroyed(err) {
 				if (err) return next(err);
 			});
-
+			
 			res.redirect('/company');
 
 		});
 	},
-
-	join: function(req,res, next){
-		userID = req.session.user.id;
-		Company.findOne({companyName: req.param('companyName')}, function foundCompany(err, company){
-			if (err) return err;
-			if (!company){
-					req.session.flash = {
-					err: ["Company already exists. If this is in error, please contact support."]
-				}
-			}
+	
+	joinCompany: function(req,res, next){
+		compName = req.param('companyName');
+		console.log(req.param('companyName'));
+		Company.find({companyName:compName}).exec(function foundCompany(err, company){
+			console.log(company);
 			
-			User.findOne(userID, function foundUser(err, user){
-				if (err) return next(err);
-				if (!user) return next('User doesn\'t exist');
-				User.update(userID, {company: req.param('companyName')}).exec(function userUpdated(err){
-					if (err) return err;
-					console.log('Updating ' + userID + ' with ' + company);
-				});
+			if (err || company.length === 0){
+				console.log("got here");
+				req.session.flash = {
+					err: ["Company doesn\'t exist. If this is in error, please contact support."]
+				};
+				return req.session.flash;
+			}
+//			User.update(req.session.user.id, {company: req.param('companyName')}).exec(function userUpdated(err){
+//					if (err) return err;
+//					console.log('Updating ' + req.session.user.id + ' with ' + req.param('companyName'));
+//				});
 			});	
-		});
 		res.redirect('/company');
 	}
 
