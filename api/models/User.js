@@ -7,7 +7,7 @@
 var bcrypt = require('bcryptjs');
 
 module.exports = {
-
+	// mongo does use a schema, so its commented out for now
 	// schema: true,
 
 	attributes: {
@@ -58,7 +58,6 @@ module.exports = {
 		},
 
 		companies: {
-			// model:'company'
 			collection: "company",
 			via: 'users',
 			dominant: true

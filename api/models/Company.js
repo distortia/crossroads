@@ -35,15 +35,17 @@ module.exports = {
   		required: true,
   		maxLength: 5
   	},
-
+    //Owner is the one who creates the company, obviously, but it has to be added in the controller.
+  	owner: {
+  		model: "user"
+  	},
+    
   	users: {
   		collection: "user",
   		via: "companies"
   	},
 
-  	owner: {
-  		model: "user"
-  	},
+
     //this is tentative, taken from the PS small biz package
     plan: {
       type: "string",
