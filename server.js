@@ -20,6 +20,13 @@ var port = process.env.PORT || 8880;
 //Setup Mongo
 mongoose.connect('mongodb://localhost/crossroads');
 
+
+//Pull in Models
+//=======================================================
+var User = require('./app/models/user.js');
+
+
+
 //Configure Router and Routes
 //======================================================
 var router = express.Router();
@@ -105,12 +112,6 @@ router.route('/users/:user_id')
 
 //Register Routes
 app.use('/', router);
-
-
-//Pull in Models
-//=======================================================
-var User = require('./app/models/user');
-
 
 //Start the server
 //=======================================================
