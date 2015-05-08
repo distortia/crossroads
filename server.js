@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
 //Set the server port
-var port = process.env.PORT || 8880
+var port = process.env.PORT || 8880;
 
 //Setup Mongo
 mongoose.connect('mongodb://localhost/crossroads');
@@ -40,9 +40,9 @@ router.get('/', function(req, res){
 //CREATE ROUTES
 //=======================================================
 
-//User Route
+//User Route - Create / List all
 router.route('/users')
-	//create a user from posting to /users
+	//create a user from using POST at /users
 	.post(function(req, res){
 		//Create a new user instance
 		var user = new User();
@@ -56,8 +56,51 @@ router.route('/users')
 				
 			res.json({message: 'User created!'});
 		});
-	});
+	})	//end post
+	//get all users from using GET at /users
+	.get(function(req, res){
+		User.find(function(err, users){
+			if (err)
+				res.send(err);
+				
+			res.json(users);
+		});	
+	}); //end get
 
+//User Route - Edit / Show / Delete by ID
+router.route('/users/:user_id')
+	//Get the user with the id
+	.get(function(req,res){
+		User.findById(req.params.user_id, function(err,user){
+			if (err)
+				res.send(err);
+			res.json(user);
+		});
+	}) //end /users/:user_id
+  	.put(function(req, res){
+		 //Get the user with the id
+		 User.findById(req.params.user_id, function(err, user){
+			if (err)
+				res.send(err);
+			user.name = req.body.name; // Updates the users name
+			//save the new user info
+			user.save(function(err){
+				if (err)
+					res.send(err);
+				res.json({message: 'User udpated!'});	
+			});
+		 });
+	  }) // end put 
+	  .delete(function(req, res){
+		 User.remove({
+			 _id: req.params.user_id
+		 }, function(err,user){
+			 if (err)
+			 	res.send(err);
+			 res.json({message: 'User Deleted'});
+		 });
+	  });
+	  
 
 
 //Register Routes
