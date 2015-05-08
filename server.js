@@ -33,7 +33,7 @@ var router = express.Router();
 
 //router middleware
 router.use(function(req, res, next){
-	console.log('Something is happening');
+//	console.log('Something is happening');
 	// next() calls the next item so we dont stop after only one
 	//We need to have next here or the app dies after one route.
 	next(); 
