@@ -45,7 +45,7 @@ router.route('/users')
 			}
 		};
 		
-		//Create a new user instance
+		//Create a new user instance with the attributes we collected
 		var user = new User(userObj);
 		
 		//Save the user and check for errors
