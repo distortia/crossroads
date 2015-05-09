@@ -1,5 +1,5 @@
 module.exports = (function() {
-//    'use strict';
+    'use strict';
 var router = require('express').Router();
 	
 //Pull in Models	
