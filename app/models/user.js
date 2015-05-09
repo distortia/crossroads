@@ -46,13 +46,13 @@ var userSchema = new Schema({
     },
     adminLevel: {
       type: String,
-      defaultsTo: '3',
-      enum: ['0', '1', '2', '3']
+      enum: ['0', '1', '2', '3'],
+      default: '3'
     },
     approved: {
       type: String,
-      defaultsTo: 'denied',
-      enum: ['pending', 'approved', 'denied']
+      enum: ['pending', 'approved', 'denied'],
+      default: 'denied'
     }
   } // End company
 });

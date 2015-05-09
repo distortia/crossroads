@@ -77,18 +77,33 @@ router.route('/users/:user_id')
 		});
 	}) //end /users/:user_id
   	.put(function(req, res){
-		 //Get the user with the id
-		 User.findById(req.params.user_id, function(err, user){
+  		var userObj = {
+			firstName: 	req.body.firstName,
+			lastName:	req.body.lastName,
+			email: 		req.body.email,
+			phone:	 	req.body.phone,
+			company: {
+				companyName: 	req.body.companyName,
+				address:		req.body.address,
+				city:			req.body.state,
+				zip:			req.body.zip,
+				owner: 			req.body.owner,
+				adminLevel:		req.body.adminLevel,
+				approved:		req.body.approved
+			}
+		};
+		 //Get the user with the id and update their userObj
+		 User.findByIdAndUpdate(req.params.user_id, userObj, function(err, user){
 			if (err)
 				res.send(err);
-				
-			user.name = req.body.name; // Updates the users name
+			
+//			user.name = req.body.name; // Updates the users name
 			//save the new user info
-			user.save(function(err){
-				if (err)
-					res.send(err);
+//			user.save(function(err){
+//				if (err)
+//					res.send(err);
 				res.json({message: 'User udpated!'});	
-			});
+//			});
 		 });
 	  }) // end put 
 	  .delete(function(req, res){
