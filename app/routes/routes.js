@@ -96,14 +96,7 @@ router.route('/users/:user_id')
 		 User.findByIdAndUpdate(req.params.user_id, userObj, function(err, user){
 			if (err)
 				res.send(err);
-			
-//			user.name = req.body.name; // Updates the users name
-			//save the new user info
-//			user.save(function(err){
-//				if (err)
-//					res.send(err);
 				res.json({message: 'User udpated!'});	
-//			});
 		 });
 	  }) // end put 
 	  .delete(function(req, res){
