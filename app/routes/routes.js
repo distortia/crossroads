@@ -50,18 +50,14 @@ router.route('/users')
 		
 		//Save the user and check for errors
 		user.save(function(err){
-			if (err)
-				res.send(err);
-				
+			if (err) res.send(err);
 			res.json({message: 'User created!'});
 		});
 	})	//end post
 	//get all users from using GET at /users
 	.get(function(req, res){
 		User.find(function(err, users){
-			if (err)
-				res.send(err);
-				
+			if (err) res.send(err);
 			res.json(users);
 		});	
 	}); //end get
@@ -71,8 +67,7 @@ router.route('/users/:user_id')
 	//Get the user with the id
 	.get(function(req,res){
 		User.findById(req.params.user_id, function(err,user){
-			if (err)
-				res.send(err);
+			if (err) res.send(err);
 			res.json(user);
 		});
 	}) //end /users/:user_id
@@ -94,17 +89,15 @@ router.route('/users/:user_id')
 		};
 		 //Get the user with the id and update their userObj
 		 User.findByIdAndUpdate(req.params.user_id, userObj, function(err, user){
-			if (err)
-				res.send(err);
-				res.json({message: 'User udpated!'});	
+			if (err) res.send(err);
+			res.json({message: 'User udpated!'});	
 		 });
 	  }) // end put 
 	  .delete(function(req, res){
 		 User.remove({
 			 _id: req.params.user_id
 		 }, function(err,user){
-			 if (err)
-			 	res.send(err);
+			 if (err) res.send(err);
 			 res.json({message: 'User Deleted'});
 		 });
 	  });
