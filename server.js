@@ -22,9 +22,9 @@ mongoose.connect('mongodb://localhost/crossroads');
 
 //Configure Router and Routes
 //======================================================
-var basicRoute = express.Router();
-var userRoutes = require('./app/routes/userRoutes');
-
+var basicRoute 		= express.Router();
+var userRoutes 		= require('./app/routes/userRoutes');
+var companyRoutes 	= require('./app/routes/companyRoutes');
 
 //Basic Route
 basicRoute.get('/', function(req, res){
@@ -34,6 +34,7 @@ basicRoute.get('/', function(req, res){
 //Register Routes
 app.use('/', basicRoute);
 app.use('/user', userRoutes);
+app.use('/company', companyRoutes);
 
 //Start the server
 //=======================================================
