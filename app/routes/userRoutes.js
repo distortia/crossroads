@@ -16,12 +16,6 @@ router.use(function(req, res, next){
 	next(); 
 });
 
-
-//Test route to make sure routing is working
-//router.get('/', function(req, res){
-//	res.json({message: "routes are working"});
-//});
-
 //User Route - Create / List all
 router.route('/')
 	//create a user from using POST at /user
