@@ -18,13 +18,13 @@ router.use(function(req, res, next){
 
 
 //Test route to make sure routing is working
-router.get('/', function(req, res){
-	res.json({message: "routes are working"});
-});
+//router.get('/', function(req, res){
+//	res.json({message: "routes are working"});
+//});
 
 //User Route - Create / List all
-router.route('/users')
-	//create a user from using POST at /users
+router.route('/')
+	//create a user from using POST at /user
 	.post(function(req, res){
 
 		//Create a userObj variable to store all of the 
@@ -54,7 +54,7 @@ router.route('/users')
 			res.json({message: 'User created!'});
 		});
 	})	//end post
-	//get all users from using GET at /users
+	//get all users from using GET at /user
 	.get(function(req, res){
 		User.find(function(err, users){
 			if (err) res.send(err);
@@ -63,14 +63,14 @@ router.route('/users')
 	}); //end get
 
 //User Route - Edit / Show / Delete by ID
-router.route('/users/:user_id')
+router.route('/:user_id')
 	//Get the user with the id
 	.get(function(req,res){
 		User.findById(req.params.user_id, function(err,user){
 			if (err) res.send(err);
 			res.json(user);
 		});
-	}) //end /users/:user_id
+	}) //end /user/:user_id
   	.put(function(req, res){
   		var userObj = {
 			firstName: 	req.body.firstName,

@@ -22,10 +22,10 @@ mongoose.connect('mongodb://localhost/crossroads');
 
 //Configure Router and Routes
 //======================================================
-var routes = require('./app/routes/routes');
+var userRoutes = require('./app/routes/routes');
 
 //Register Routes
-app.use('/', routes);
+app.use('/user', userRoutes);
 
 //Start the server
 //=======================================================
