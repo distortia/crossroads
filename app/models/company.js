@@ -33,7 +33,7 @@ var companySchema = new Schema({
 		userId: {
 			type: String,
 		}
-	}
+	} 
 });
 
 module.exports = mongoose.model('Company', companySchema);
