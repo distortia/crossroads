@@ -25,23 +25,7 @@ var userSchema = new Schema({
     type: String
   },
   company: {
-    companyName: {
-      type: String,
-      unique: true
-    },
-    address: {
-      type: String
-    },
-    city: {
-      type: String
-    },
-    state: {
-      type: String
-    },
-    zip: {
-      type: String
-    },
-    owner: {
+    companyId: {
       type: String
     },
     adminLevel: {
@@ -54,7 +38,7 @@ var userSchema = new Schema({
       enum: ['pending', 'approved', 'denied'],
       default: 'denied'
     }
-  } // End company
+  }
 });
 
 
