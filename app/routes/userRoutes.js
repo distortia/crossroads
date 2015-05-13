@@ -29,7 +29,7 @@ router.route('/')
 			email: 		req.body.email,
 			phone:	 	req.body.phone,
 			company: {
-				companyId: 	req.body.companyId,
+				company_id: req.body.company_id,
 				adminLevel:	req.body.adminLevel,
 				approved:	req.body.approved
 			}
@@ -68,13 +68,9 @@ router.route('/:user_id')
 			email: 		req.body.email,
 			phone:	 	req.body.phone,
 			company: {
-				companyName: 	req.body.companyName,
-				address:		req.body.address,
-				city:			req.body.state,
-				zip:			req.body.zip,
-				owner: 			req.body.owner,
-				adminLevel:		req.body.adminLevel,
-				approved:		req.body.approved
+				company_id:	req.body.company_id,
+				adminLevel:	req.body.adminLevel,
+				approved:	req.body.approved
 			}
 		};
 		 //Get the user with the id and update their userObj
