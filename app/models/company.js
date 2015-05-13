@@ -7,27 +7,27 @@ var companySchema = new Schema({
     companyName: {
       type: String,
       unique: true,
-	    required: true,
+//	    required: true,
     },
     address: {
       type: String,
-	  required: true
+//	  required: true
     },
     city: {
       type: String,
-	  required: true
+//	  required: true
     },
     state: {
       type: String,
-	  required: true
+//	  required: true
     },
     zip: {
       type: String,
-	  required: true
+//	  required: true
     },
     owner: {
       type: String,
-	  required: true
+//	  required: true
     },
 	users: {
 		userId: {

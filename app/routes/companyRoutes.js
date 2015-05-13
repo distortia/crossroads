@@ -38,7 +38,7 @@ router.route('/')
 	}) // end post
 	.get(function(req, res){
 		//get all companies
-		res.json({message: 'test'});
+//		res.json({message: 'test'});
 		Company.find(function(err, companies){
 			if (err) res.send(err);
 			res.json(companies);
