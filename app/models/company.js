@@ -7,7 +7,7 @@ var companySchema = new Schema({
     companyName: {
       type: String,
       unique: true,
-	  required: true,
+	    required: true,
     },
     address: {
       type: String,

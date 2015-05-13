@@ -9,7 +9,7 @@ var Company = require('../models/company');
 //===========================================
 
 //router middleware
-router.user(function(req, res, next){
+router.use(function(req, res, next){
 	next();
 });
 
@@ -47,8 +47,6 @@ router.route('/')
 	
 router.route('/:company_id') // Need a company ID field
 	.get(function(req, res){
-		//get company information
-		//get all users in company
 		Company.findById(req.params.company_id, function(err, company){
 			if (err) res.send(err);
 			res.json(company);
