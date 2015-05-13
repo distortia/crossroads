@@ -1,9 +1,8 @@
 module.exports = (function() {
-	'use strict';
-	
+    'use strict';
 var router = require('express').Router();
-
-//Pull in Models
+	
+//Pull in Models	
 var Company = require('../models/company');
 //CREATE ROUTES
 //===========================================
@@ -39,6 +38,7 @@ router.route('/')
 	}) // end post
 	.get(function(req, res){
 		//get all companies
+		res.json({message: 'test'});
 		Company.find(function(err, companies){
 			if (err) res.send(err);
 			res.json(companies);
@@ -84,4 +84,4 @@ router.route('/:company_id') // Need a company ID field
 	});
 	
 	return router;
-});
+})();
