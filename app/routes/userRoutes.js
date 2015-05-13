@@ -29,13 +29,9 @@ router.route('/')
 			email: 		req.body.email,
 			phone:	 	req.body.phone,
 			company: {
-				companyName: 	req.body.companyName,
-				address:		req.body.address,
-				city:			req.body.state,
-				zip:			req.body.zip,
-				owner: 			req.body.owner,
-				adminLevel:		req.body.adminLevel,
-				approved:		req.body.approved
+				companyId: 	req.body.companyId,
+				adminLevel:	req.body.adminLevel,
+				approved:	req.body.approved
 			}
 		};
 		
