@@ -1,7 +1,8 @@
 //app/models/company.js
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose    = require('mongoose');
+var Schema      = mongoose.Schema;
+var userSchema  = require('user');
 
 var companySchema = new Schema({
     companyName: {
@@ -29,11 +30,7 @@ var companySchema = new Schema({
       type: String,
 //	  required: true
     },
-	users: {
-		userId: {
-			type: String,
-		}
-	} 
+	users: [ userSchema ]
 });
 
 module.exports = mongoose.model('Company', companySchema);

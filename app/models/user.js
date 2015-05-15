@@ -1,7 +1,9 @@
 // app/models/user.js
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose      = require('mongoose');
+var Schema        = mongoose.Schema;
+var companySchema = require('company');
+
 
 var userSchema = new Schema({
   firstName:{
@@ -24,23 +26,18 @@ var userSchema = new Schema({
   encryptedPassword: {
     type: String
   },
-  company: {
-    companyId: {
-      type: String
-    },
-    adminLevel: {
-      type: String,
-      enum: ['0', '1', '2', '3'],
-      default: '3'
-    },
-    approved: {
-      type: String,
-      enum: ['pending', 'approved', 'denied'],
-      default: 'denied'
-    }
-  }
+  company: [companySchema]
 });
-
+//  adminLevel: {
+//    type: String,
+//    enum: ['0', '1', '2', '3'],
+//    default: '3'
+//  },
+//  approved: {
+//    type: String,
+//    enum: ['pending', 'approved', 'denied'],
+//    default: 'denied'
+//  }
 
 //Model Methods
 userSchema.methods.getFullName = function(){
