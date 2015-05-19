@@ -47,72 +47,10 @@ module.exports = {
 		encryptedPassword: {
 			type: 'string'
 		},
-		
-		company:{
-			
-		  	companyName: {
-		  		type: "string",
-		  		unique: true,
-		  		required: true
-		  	},
-	  		//USER ADMIN LEVEL IS BROKEN DOWN INTO 4 categories
-			//Crossroads Admin 	- 0
-			//Company Owner		- 1
-			//Site Admin		- 2
-			//Content Admin		- 3  -- lowest form of rights
-			adminLevel: {
-				type: 'integer',
-				defaultsTo: '3'
-			},
-				
-		  	street: {
-		  		type: "string",
-		  		required: true
-		  	},
-		
-		  	city: {
-		  		type: "string",
-		  		required: true
-		  	},
-		  	//Maybe use an enum to only allow for valid us states
-		  	//Or just use a drop down and say yolo
-		  	state: {
-		  		type: "string",
-		  		required: true
-		  	},
-		
-		  	zipCode: {
-		  		type: "integer",
-		  		required: true,
-		  		maxLength: 5
-		  	},
-		    //Owner is the one who creates the company, obviously, but it has to be added in the controller.
-		  	owner: {
-		  		model: "user"
-		  	},
-		    
-		  	users: {
-		  		collection: "user",
-		  		via: "companies"
-		  	},
-		
-		
-		    //this is tentative, taken from the PS small biz package
-		    plan: {
-		      type: "string",
-		      enum: ['essential', 'business', 'enterprise']
-		    }, 
-			//When a user joins a company, they must be approved by the company admin or site admin
-			//Maybe convert these to integers to make it easier and quicker to process
-			approved: {
-				type: 'string',
-				enum: ['pending','approved', 'denied'] 
-			}, 
-		},
 
-		companies: {
-			collection: "company",
-			via: 'users',
+		companyList: {
+			collection: 'company',
+			via: 'userList',
 			dominant: true
 		},
 
@@ -128,6 +66,15 @@ module.exports = {
 
 		getFullName: function() {
 			return this.firstName + ' ' + this.lastName;
+		},
+
+		getCompanyName: function(companyId){
+			console.log(companyId);
+			Company.findOneById(companyId, function foundCompany(err, company){
+				if (err) return err;
+				console.log(company);
+				return company;
+			});
 		}
 	},
 

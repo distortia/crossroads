@@ -15,7 +15,9 @@
 			</tr>
 			<% _.each(users, function(user){ %>	
 			<tr data-id="<%= user.id %>" data-model="user">
-				<td><%= user.company %></td>
+			<!-- Find company based on user.company and get its companyName 
+					Maybe move this into the controller?-->
+				<td><%= user.getCompanyName(user.company) %></td>
 				<td><%= user.getFullName() %></td>
 				<td><%= user.adminLevel %></td>
 				<td><%= user.email %></td>

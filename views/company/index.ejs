@@ -14,6 +14,8 @@
 			<% _.each(companies, function(company){ %>
 			<tr data-id="<%= company.id %>" data-model="company">
 				<td><%= company.companyName %></td>
+				<!-- Find a user by id who matches the company.owner id
+					Maybe move this into the controller?-->
 				<td><%= company.owner %></td>
 				<td><%= company.plan %></td>
 				<td><a href="/company/show/<%= company.id %>" class="btn btn-sm btn-primary">Show</a></td>

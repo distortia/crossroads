@@ -36,11 +36,11 @@ module.exports.policies = {
     '*': 'isAdmin'
   },
   
-  // CompanyController: {
-  //   // edit: ['isAdmin', 'isLoggedIn', 'flash'],
-  //   // update: ['isAdmin', 'isLoggedIn', 'flash'],
-  //   '*': ['isLoggedIn', 'flash']
-  // },
+  CompanyController: {
+    // edit: ['isAdmin', 'isLoggedIn', 'flash'],
+    // update: ['isAdmin', 'isLoggedIn', 'flash'],
+    '*': ['isLoggedIn', 'flash']
+  },
 
   /***************************************************************************
   *                                                                          *

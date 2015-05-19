@@ -40,16 +40,16 @@ module.exports = {
   		model: "user"
   	},
     
-  	users: {
+  	userList: {
   		collection: "user",
-  		via: "companies"
+  		via: 'companyList'
   	},
-
 
     //this is tentative, taken from the PS small biz package
     plan: {
       type: "string",
-      enum: ['essential', 'business', 'enterprise']
+      enum: ['essential', 'business', 'enterprise'],
+      defaultsTo: 'essential'
     }, 
 
   	toJSON: function() {

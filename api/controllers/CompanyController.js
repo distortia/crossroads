@@ -30,7 +30,7 @@ module.exports = {
 
 		//Comany.update company.owner with req.session.user.id
 		Company.create(companyObj, function companyCreated(err, company) {
-			if (err) {
+			if (err || company) {
 				req.session.flash = {
 					err: ["Company already exists. If this is in error, please contact support."]
 				};
@@ -124,21 +124,21 @@ module.exports = {
 	
 	joinCompany: function(req,res, next){
 		compName = req.param('companyName');
-		console.log(req.param('companyName'));
 		Company.find({companyName:compName}).exec(function foundCompany(err, company){
-			console.log(company);
-			
 			if (err || company.length === 0){
-				console.log("got here");
 				req.session.flash = {
 					err: ["Company doesn\'t exist. If this is in error, please contact support."]
 				};
 				return req.session.flash;
 			}
-//			User.update(req.session.user.id, {company: req.param('companyName')}).exec(function userUpdated(err){
-//					if (err) return err;
-//					console.log('Updating ' + req.session.user.id + ' with ' + req.param('companyName'));
-//				});
+			//Find the company
+			//Gets the id of the company
+			//Updates user with the companyId
+			//Updates company with userId
+			User.update(req.session.user.id, {companyList: req.param('companyName')}).exec(function userUpdated(err){
+					if (err) return err;
+					console.log('Updating ' + req.session.user.id + ' with ' + req.param('companyName'));
+				});
 			});	
 		res.redirect('/company');
 	}

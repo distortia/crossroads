@@ -56,11 +56,25 @@
       <ul class="nav navbar-nav">
         <li><a href="/">Home</a></li>
         <% if (session.authenticated) { %>
-          <li><a href="/user/show/<%= session.user.id %>"><%= session.user.firstName %>'s Profile</a></li>
-         <li><a href="/company">My Company</a></li>
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Company <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/company">All Companies</a></li>
+            <li><a href="/company/new">Create company</a></li>
+            <li><a href="/company/join">Join company</a></li>
+          </ul>
+        </li>
         <% } %>
         <% if (session.authenticated && session.user.admin) { %>   
-           <li><a href="/user">Users</a></li>
+          
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/user">All Users</a></li>
+            <li><a href="/user/show/<%= session.user.id %>">Show Profile</a></li>
+            <li><a href="/user/edit/<%= session.user.id %>">Edit Profile</a></li>
+          </ul>
+        </li>
         <% } %>
       </ul>
       <% if (session.authenticated) {%>
