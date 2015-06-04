@@ -21,11 +21,11 @@ module.exports = {
 			email: 			req.param('email'),
 			phoneNumber: 	req.param('phoneNumber'),
 			password: 		req.param('password'),
-			adminLevel: 	req.param('adminLevel'),
+			adminLevel: 		req.param('adminLevel'),
 			confirm: 		req.param('confirm')
 		}
 
-		// Create a User with the params sent from 
+		// Create a User with the params sent from
 		// the sign-up form --> new.ejs
 		User.create(userObj, function userCreated(err, user) {
 
@@ -88,7 +88,6 @@ module.exports = {
 		User.findOne(req.param('id'), function foundUser(err, user) {
 			if (err) return next(err);
 			if (!user) return next('User doesn\'t exist.');
-
 			res.view({
 				user: user
 			});
@@ -101,7 +100,7 @@ module.exports = {
 			firstName: 		req.param('firstName'),
 			lastName: 		req.param('lastName'),
 			fullName: 		req.param('fullName'),
-			adminLevel: 	req.param('adminLevel'),
+			adminLevel: 		req.param('adminLevel'),
 			email: 			req.param('email'),
 			phoneNumber: 	req.param('phoneNumber'),
 			admin: 			req.param('admin')
@@ -116,7 +115,7 @@ module.exports = {
 			firstName: 		req.param('firstName'),
 			lastName: 		req.param('lastName'),
 			fullName: 		req.param('fullName'),
-			adminLevel: 	req.param('adminLevel'),
+			adminLevel: 		req.param('adminLevel'),
 			email: 			req.param('email'),
 			phoneNumber: 	req.param('phoneNumber')
 			}

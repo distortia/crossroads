@@ -7,9 +7,9 @@
 		<span class="icono-user grey" aria-hidden="true"></span>(Standard User)
 	<% } %>
 
-	<h4>Company: <%= user.company %></h4>
+	<h4>Company: <%= user.companyList %></h4>
 	<h3>User Level: <%= user.adminLevel %></h3>
 	<hr>
 	<h3>Contact: <a href="mailto:<%= user.email %>"><%= user.email %></h3>
 	<a class="btn btn-md btn-primary" href="/user/edit/<%= user.id %>">Edit</a>
-</div> 
+</div>

@@ -17,15 +17,15 @@ $large-screen: 960px;
 	text-align: center;
 	margin: 0 auto;
 	max-width:65%;
-	@media(min-width: $screen-sm) { 
+	@media(min-width: $screen-sm) {
 		max-width:50%;
 	}
-	@media(min-width: $screen-md) { 
+	@media(min-width: $screen-md) {
 		max-width:40%;
-	}	
-	@media(min-width: $screen-md-lg) { 
+	}
+	@media(min-width: $screen-md-lg) {
 		max-width:35%;
-	}	
+	}
 	@media(min-width: $screen-lg) {
 		max-width:30%;
 	}

@@ -7,11 +7,9 @@
 var bcrypt = require('bcryptjs');
 
 module.exports = {
-	// mongo does use a schema, so its commented out for now
-	// schema: true,
 
 	attributes: {
-		
+
 		firstName: {
 			type: 'string',
 			required: true
@@ -21,7 +19,7 @@ module.exports = {
 			type: 'string',
 			required: true
 		},
-		
+
 		email: {
 			type: 'string',
 			email: true,
@@ -69,10 +67,10 @@ module.exports = {
 		},
 
 		getCompanyName: function(companyId){
-			console.log(companyId);
+			// console.log(companyId);
 			Company.findOneById(companyId, function foundCompany(err, company){
 				if (err) return err;
-				console.log(company);
+				// console.log(company);
 				return company;
 			});
 		}
@@ -100,7 +98,5 @@ module.exports = {
 			values.encryptedPassword = encryptedPassword;
 			next();
 		});
-
 	}
-
 };

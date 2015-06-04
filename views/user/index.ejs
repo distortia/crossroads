@@ -13,14 +13,14 @@
 				<th></th>
 				<th></th>
 			</tr>
-			<% _.each(users, function(user){ %>	
+			<% _.each(users, function(user){ %>
 			<tr data-id="<%= user.id %>" data-model="user">
-			<!-- Find company based on user.company and get its companyName 
+			<!-- Find company based on user.company and get its companyName
 					Maybe move this into the controller?-->
 				<td><%= user.getCompanyName(user.company) %></td>
-				<td><%= user.getFullName() %></td>
+				<td><a href="/user/show/<%= user.id %>"><%= user.getFullName() %></a></td>
 				<td><%= user.adminLevel %></td>
-				<td><%= user.email %></td>
+				<td><a href="mailto:<%= user.email %>"><%= user.email %></td>
 				<%if (user.admin) {%>
 				<td><span class="icono-user gold" aria-hidden="true"></span></td>
 				<% } else { %>

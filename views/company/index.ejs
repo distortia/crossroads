@@ -13,10 +13,10 @@
 
 			<% _.each(companies, function(company){ %>
 			<tr data-id="<%= company.id %>" data-model="company">
-				<td><%= company.companyName %></td>
+				<td><a href="/company/show/<%= company.id %>"><%= company.companyName %></a></td>
 				<!-- Find a user by id who matches the company.owner id
 					Maybe move this into the controller?-->
-				<td><%= company.owner %></td>
+				<td><a href="/user/show/<%= company.owner %>"><%= company.owner %></a></td>
 				<td><%= company.plan %></td>
 				<td><a href="/company/show/<%= company.id %>" class="btn btn-sm btn-primary">Show</a></td>
 				<td><a href="/company/edit/<%= company.id %>" class="btn btn-sm btn-warning">Edit</a></td>

@@ -23,48 +23,36 @@ module.exports = {
   		type: "string",
   		required: true
   	},
-  	//Maybe use an enum to only allow for valid us states
-  	//Or just use a drop down and say yolo
+
   	state: {
   		type: "string",
   		required: true
   	},
 
   	zipCode: {
-  		type: "integer",
+  		type: "string",
   		required: true,
   		maxLength: 5
   	},
-    //Owner is the one who creates the company, obviously, but it has to be added in the controller.
+
   	owner: {
   		model: "user"
   	},
-    
   	userList: {
   		collection: "user",
   		via: 'companyList'
   	},
-
-    //this is tentative, taken from the PS small biz package
     plan: {
       type: "string",
       enum: ['essential', 'business', 'enterprise'],
       defaultsTo: 'essential'
-    }, 
+    },
 
   	toJSON: function() {
   		var obj = this.toObject();
   		delete obj._csrf;
   		return obj;
   	}
-
-    // getOwner: function(){
-    //   User.findOne(this.owner, function foundUser(err, user) {
-        
-    //   });
-    //   return ownerName;
-    // }
   },
-
 };
 
